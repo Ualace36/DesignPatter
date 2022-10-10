@@ -1,19 +1,20 @@
-package treinoEstrategy;
+package Facade;
 
 public class Main {
     public static void main(String[] args) {
-        Frete fretecomum = new FreteComum();
-        Frete fretePrime = new FretePrime();
-        Frete fretepj = new FretePj();
-        Frete freteExpresso = new FreteExpresso();
-       Pedido pe = new PedidoUtilitario(584.02);
-       pe.setTipoFrete(fretecomum);
-        System.out.println("Valor do frete comum é: R$ " + pe.calcularFrete());
-        pe.setTipoFrete(freteExpresso);
-        System.out.println("Valor do frete Expresso é: R$ " + pe.calcularFrete());
-        pe.setTipoFrete(fretePrime);
-        System.out.println("Valor do frete Prime é: R$ " + pe.calcularFrete());
-        pe.setTipoFrete(fretepj);
-        System.out.println("Valor do frete Pj é: R$ " + pe.calcularFrete());
+        Cartao cartao = new Cartao("15git 34567890", "Star Bank");
+        Produto produto = new Produto("Ervilhas", "Pacote");
+
+
+        ApiCartao apiCartao = new ApiCartao();
+        ApiProduto apiProduto = new ApiProduto();
+        ApiQuantidade apiQuantidade = new ApiQuantidade();
+        int desconto = apiCartao.desconto(cartao) + apiProduto.desconto(produto) + apiQuantidade.desconto(15);
+        System.out.println(desconto);
+
+
+        FacadeDesconto facadeDesconto = new FacadeDesconto();
+        desconto = facadeDesconto.calcularDesconto(cartao, produto, 15);
+        System.out.println(desconto);
     }
 }
